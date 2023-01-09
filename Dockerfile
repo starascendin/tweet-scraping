@@ -9,6 +9,15 @@ RUN sudo apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+RUN sudo apt-get update && apt-get install --no-install-recommends -y \
+  # dependencies for building Python packages
+  build-essential \
+  # psycopg2 dependencies
+  libpq-dev
+
+RUN sudo apt-get install libffi-dev
+
+
 USER airflow
 # Install requirements
 RUN pip install --upgrade pip
